@@ -1,0 +1,8 @@
+streamlit
+pandas
+numpy
+scikit-learn
+openpyxl
+altair
+streamlit_scroll_to_top
+mysql-connector-python
