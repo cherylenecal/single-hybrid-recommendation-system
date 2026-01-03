@@ -11,6 +11,7 @@ import re
 import altair as alt
 from streamlit_scroll_to_top import scroll_to_here
 import mysql.connector
+import time
 
 
 class DatabaseManager:
@@ -4135,6 +4136,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
