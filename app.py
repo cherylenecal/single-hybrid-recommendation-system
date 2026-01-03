@@ -516,9 +516,6 @@ def render_cover_page():
         st.session_state['halaman_sekarang'] = "profil"
         st.rerun()
     
-    # LINK BAWAH
-    st.markdown('<p class="footer-link">Already have business? go to homepage</p>', unsafe_allow_html=True)
-    
     st.markdown('</div>', unsafe_allow_html=True)
     
 
@@ -4137,6 +4134,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
