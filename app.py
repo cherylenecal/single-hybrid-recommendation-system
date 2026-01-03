@@ -2515,9 +2515,6 @@ class RecommenderEngine:
         invalid_candidates = set(initial) - set(valid_initial)
         
         # [TRACKING]
-        if invalid_candidates:
-            # st.write(f"6. Substitution needed for invalid candidates: {invalid_candidates}")
-
         for invalid in invalid_candidates:
 
             # Cek sektor apa saja yang SUDAH terwakili oleh kandidat saat ini
@@ -4108,5 +4105,6 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
