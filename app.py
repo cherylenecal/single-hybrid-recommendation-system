@@ -995,7 +995,7 @@ def render_part_1():
     @media (max-width: 600px) {
         h2 { font-size: 20px !important; }
         .custom-soal {
-            font-size: 20px !important; /* Lebih kecil di HP */
+            font-size: 22px !important; /* Lebih kecil di HP */
         }
 
         /* Cari Block yang ada tombol NEXT */
@@ -1151,10 +1151,11 @@ def render_part_2():
     }
 
     /* 4. TEKS PERTANYAAN */
-    div[data-testid="stMarkdownContainer"] p {
-        font-size: 20px !important; 
+    .custom-soal {
+        font-size: 25px !important; /* Atur besar huruf di sini */
         font-weight: 500 !important;
         color: #2D4A44 !important;
+        line-height: 1.5;
     }
     
     /* 5. TOMBOL UMUM */
@@ -1187,7 +1188,9 @@ def render_part_2():
     /* 6. RESPONSIVE KHUSUS NAVIGASI (SNIPER MODE 🎯) */
     @media (max-width: 600px) {
         h2 { font-size: 20px !important; }
-        div[data-testid="stMarkdownContainer"] p { font-size: 8px !important; }
+        .custom-soal {
+            font-size: 22px !important; /* Lebih kecil di HP */
+        }
 
         /* Cari Block yang ada tombol NEXT */
         div[data-testid="stHorizontalBlock"]:has(button[data-testid="stBaseButton-primary"]) {
@@ -4133,6 +4136,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
