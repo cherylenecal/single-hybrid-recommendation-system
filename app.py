@@ -2434,7 +2434,7 @@ class RecommenderEngine:
         """
         
         # [TRACKING START]
-        st.write("--- 🛠️ DEBUG TRACKING: get_recommended_cluster_refined ---")
+        # st.write("--- 🛠️ DEBUG TRACKING: get_recommended_cluster_refined ---")
 
         # 1. Ambil Data Input
         # qA = Cluster Juara dari sisi Entrepreneurship (List atau String)
@@ -2461,7 +2461,7 @@ class RecommenderEngine:
 
         # Jika salah satu kosong -> Gagal
         if not qA or not qB:
-            st.write("❌ Gagal: Salah satu input kosong.")
+            # st.write("❌ Gagal: Salah satu input kosong.")
             return ["Belum dapat menentukan cluster yang sesuai."]
 
         # ---------------------------------------------------
@@ -2475,16 +2475,16 @@ class RecommenderEngine:
         
         if intersection:
             initial = intersection[:]
-            st.write("   -> Using RULE 1 (Intersection Found)")
+            # st.write("   -> Using RULE 1 (Intersection Found)")
         else:
             # RULE 2 — Jika tidak ada irisan, Ambil terbaik masing-masing
             # Ambil juara 1 dari qA dan juara 1 dari qB
             # (Pastikan index 0 aman karena sudah dicek 'if not qA' diatas)
             initial = [qA[0], qB[0]]
-            st.write("   -> Using RULE 2 (Top 1 from each)")
+            # st.write("   -> Using RULE 2 (Top 1 from each)")
 
         # [TRACKING]
-        st.write(f"4. Initial Candidates: {initial}")
+        # st.write(f"4. Initial Candidates: {initial}")
 
         # ---------------------------------------------------
         # VALIDASI KANDIDAT AWAL
@@ -2496,7 +2496,7 @@ class RecommenderEngine:
         ]
 
         # [TRACKING]
-        st.write(f"5. Valid Candidates (Mapping Check): {valid_initial}")
+        # st.write(f"5. Valid Candidates (Mapping Check): {valid_initial}")
 
         final_candidates = valid_initial.copy() # yg valid aja
 
@@ -2516,7 +2516,7 @@ class RecommenderEngine:
         
         # [TRACKING]
         if invalid_candidates:
-            st.write(f"6. Substitution needed for invalid candidates: {invalid_candidates}")
+            # st.write(f"6. Substitution needed for invalid candidates: {invalid_candidates}")
 
         for invalid in invalid_candidates:
 
@@ -2589,8 +2589,8 @@ class RecommenderEngine:
 
         # [TRACKING END]
         result = final_candidates[:2]
-        st.write(f"🏁 FINAL RESULT: {result}")
-        st.write("--------------------------------------------------")
+        # st.write(f"🏁 FINAL RESULT: {result}")
+        # st.write("--------------------------------------------------")
 
         return result
     
@@ -4106,4 +4106,5 @@ def main():
         render_comparison_dashboard()
 
 if __name__ == "__main__":
+
     main()
