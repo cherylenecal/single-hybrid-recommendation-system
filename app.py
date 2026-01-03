@@ -985,59 +985,48 @@ def render_part_1():
         color: #FFFFFF !important;
         border: none !important;
     }
-
+    
     /* Hover Effects */
     div.stButton > button:hover { transform: translateY(-2px); }
     div.stButton > button[kind="primary"]:hover { background-color: #1A1A5E !important; }
     div.stButton > button[kind="secondary"]:hover { background-color: #F0F2FF !important; }
 
     /* ========================================================== */
-    /* 6. RESPONSIVE (HP) - MODE PAKSA (NUCLEAR OPTION) ☢️      */
+    /* 6. RESPONSIVE KHUSUS TOMBOL NAVIGASI (HANYA TOMBOL)      */
     /* ========================================================== */
     @media (max-width: 600px) {
         
-        /* Kecilkan font */
+        /* A. Font Size Kecil di HP */
         h2 { font-size: 20px !important; }
         div[data-testid="stMarkdownContainer"] p { font-size: 14px !important; }
 
-        /* --- TRIK SIDE-BY-SIDE --- */
-
-        /* 1. FORCE CONTAINER JADI BARIS (ROW) */
-        [data-testid="stHorizontalBlock"] {
+        /* B. LOGIKA KHUSUS TOMBOL KIRI-KANAN */
+        /* Hanya targetkan baris yang punya tombol Primary (Next) di dalamnya */
+        div[data-testid="stHorizontalBlock"]:has(button[kind="primary"]) {
             display: flex !important;
             flex-direction: row !important;
-            flex-wrap: nowrap !important; /* DILARANG TURUN KE BAWAH */
             align-items: center !important;
-            gap: 8px !important; /* Jarak antar tombol dikurangi */
+            gap: 10px !important;
         }
 
-        /* 2. MATIKAN KOLOM TENGAH (SPACER) */
-        [data-testid="column"]:nth-of-type(2) {
+        /* Sembunyikan Spasi Tengah (Kolom ke-2) HANYA di baris tombol */
+        div[data-testid="stHorizontalBlock"]:has(button[kind="primary"]) [data-testid="column"]:nth-of-type(2) {
             display: none !important;
-            width: 0px !important;
-            flex: 0 !important;
-            min-width: 0px !important; /* Ini yg sering bikin error */
         }
 
-        /* 3. ATUR KOLOM KIRI & KANAN */
-        [data-testid="column"]:nth-of-type(1), 
-        [data-testid="column"]:nth-of-type(3) {
+        /* Atur Lebar Tombol Back (Kolom 1) & Next (Kolom 3) */
+        div[data-testid="stHorizontalBlock"]:has(button[kind="primary"]) [data-testid="column"] {
             width: 50% !important;
-            flex: 1 1 0px !important; /* Flex grow 1, shrink 1, basis 0 (PENTING) */
-            min-width: 0px !important; /* PENTING: Biarkan dia mengecil di bawah batas default */
-            max-width: 50% !important;
+            flex: 1 !important;
+            min-width: 0 !important;
         }
 
-        /* 4. STYLING TOMBOL DI HP */
+        /* Styling Tombolnya agar muat */
         div.stButton > button {
             width: 100% !important; 
-            font-size: 12px !important; /* Font lebih kecil biar muat */
+            font-size: 13px !important;
             padding: 8px 0 !important;
-            margin: 0 !important;
-            height: 40px !important; /* Fix tinggi biar rapi */
-            white-space: nowrap !important; /* Teks dilarang turun baris */
-            overflow: hidden !important;
-            text-overflow: ellipsis !important;
+            white-space: nowrap !important; 
         }
     }
     </style>
@@ -4146,6 +4135,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
