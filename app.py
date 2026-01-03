@@ -1033,7 +1033,7 @@ def render_part_1():
 
         /* 4. Styling Tombol di HP */
         div.stButton > button { 
-            width: 50% !important; /* Tombol memenuhi kolomnya */
+            width: 100% !important; /* Tombol memenuhi kolomnya */
             font-size: 13px !important; /* Huruf agak kecil biar muat */
             padding: 10px 0 !important; /* Padding atas bawah */
             margin-bottom: 0 !important;
@@ -4147,6 +4147,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
