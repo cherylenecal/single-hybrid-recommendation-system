@@ -94,7 +94,7 @@ class DatabaseManager:
     # 3. FUNGSI SIMPAN DATA USER
     def save_user_profile(self, profile_dict):
         print("--- [DEBUG] 1. Membuka Koneksi... ---")
-        conn = self.get_connection()s
+        conn = self.get_connection()
         print("--- [DEBUG] Connected ---")
         cursor = conn.cursor()
 
@@ -4144,6 +4144,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
