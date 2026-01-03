@@ -585,7 +585,7 @@ def render_profile():
         """)
     # --------------------------------
     
-    st.caption("Mohon pilih kategori yang paling menggambarkan peran Anda dalam aktivitas ekonomi atau profesional saat ini:")
+    st.write("Mohon pilih kategori yang paling menggambarkan peran Anda dalam aktivitas ekonomi atau profesional saat ini:")
     
     role = st.selectbox(
         "Pilih Kategori", # Label tersembunyi/kecil karena sudah ada di write/caption
@@ -4147,6 +4147,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
