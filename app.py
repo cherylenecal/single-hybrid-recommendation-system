@@ -1124,99 +1124,96 @@ def render_part_1():
                     st.error(f"Gagal menyimpan: {e}")
 
 def render_part_2():
+    # --- STYLE CSS UNTUK TAMPILAN COVER ---
     st.markdown("""
     <style>
     /* 1. SETUP DASAR */
     .stApp {
         background-color: #F8F9F1;
-    }
-    
-    /* 2. CONTAINER COVER */
-    .cover-container {
-        text-align: left;
-        /* Desktop: Padding besar agar lega */
-        padding: 100px 10% 20px 10%; 
-    }
-    
-    /* 3. TYPOGRAPHY (DESKTOP) */
-    .main-title {
-        color: #0A0A44;
-        font-size: 36px; /* Besar di Desktop */
-        font-weight: 800;
-        margin-bottom: 20px;
-        font-family: 'Inter', sans-serif;
-        line-height: 1.2;
-    }
-    
-    .description {
-        color: #2D4A44;
-        font-size: 24px; /* Besar di Desktop */
-        line-height: 1.5;
-        margin-bottom: 30px;
         font-family: 'Inter', sans-serif;
     }
     
-    .hint-text {
-        color: #4A4A4A;
-        font-size: 14px;
-        margin-bottom: 5px;
-    }
-    
-    .cta-text {
-        color: #4A4A4A;
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 30px;
+    /* 2. HEADER */
+    h2 {
+        color: #0A0A44 !important;
+        font-weight: 700 !important;
+        font-size: 28px !important;
+        margin-bottom: 1rem !important;
+        padding-top: 1rem;
     }
 
-    /* 4. STYLING TOMBOL */
+    /* 3. PROGRESS BAR */
+    .stProgress > div > div > div > div {
+        background-color: #03043D;
+    }
+
+    /* 4. TEKS PERTANYAAN */
+    div[data-testid="stMarkdownContainer"] p {
+        font-size: 20px !important; 
+        font-weight: 500 !important;
+        color: #2D4A44 !important;
+    }
+    
+    /* 5. TOMBOL UMUM */
     div.stButton > button {
-        background-color: #03043D !important;
-        color: white !important;
         border-radius: 8px !important;
-        padding: 10px 40px !important;
-        font-size: 18px !important;
+        font-size: 16px !important;
         font-weight: 600 !important;
-        border: none !important;
-        transition: 0.3s;
-        box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+        padding: 0.5rem 1rem !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        width: 100%; 
+        transition: all 0.3s ease;
+    }
+
+    /* PENTING: Paksa teks di dalam tombol agar warnanya mengikuti tombol (bukan ikut warna pertanyaan) */
+    div.stButton p {
+        color: inherit !important;
     }
     
-    div.stButton > button:hover {
-        background-color: #1A1A5E !important;
-        transform: scale(1.05);
+    div.stButton > button[kind="secondary"] {
+        background-color: #FFFFFF !important;
+        color: #03043D !important;
+        border: 2px solid #03043D !important;
+    }
+    div.stButton > button[kind="primary"] {
+        background-color: #03043D !important;
+        color: #FFFFFF !important;
+        border: none !important;
     }
 
-    .footer-link {
-        color: #0A0A44;
-        font-size: 13px;
-        text-decoration: underline;
-        cursor: pointer;
-    }
-
-    /* ============================================= */
-    /* 5. MEDIA QUERY UNTUK HP (Layar < 600px)       */
-    /* ============================================= */
+    /* 6. RESPONSIVE KHUSUS NAVIGASI (SNIPER MODE 🎯) */
     @media (max-width: 600px) {
-        .cover-container {
-            /* Kurangi padding atas agar tidak terlalu turun */
-            padding: 40px 5% 20px 5% !important; 
+        h2 { font-size: 20px !important; }
+        div[data-testid="stMarkdownContainer"] p { font-size: 14px !important; }
+
+        /* Cari Block yang ada tombol NEXT */
+        div[data-testid="stHorizontalBlock"]:has(button[data-testid="stBaseButton-primary"]) {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            flex-wrap: nowrap !important;
+            gap: 10px !important;
         }
 
-        .main-title {
-            /* Kecilkan font judul agar muat */
-            font-size: 24px !important; 
+        /* Hapus Kolom Tengah */
+        div[data-testid="stHorizontalBlock"]:has(button[data-testid="stBaseButton-primary"]) > div[data-testid="stColumn"]:nth-child(2) {
+            display: none !important;
+            width: 0 !important;
         }
 
-        .description {
-            /* Kecilkan font deskripsi agar enak dibaca */
-            font-size: 16px !important; 
+        /* Bagi Rata Kiri Kanan */
+        div[data-testid="stHorizontalBlock"]:has(button[data-testid="stBaseButton-primary"]) > div[data-testid="stColumn"] {
+            width: 50% !important;
+            flex: 1 !important;
+            min-width: 0 !important;
         }
 
+        /* Styling Tombol HP */
         div.stButton > button {
-            /* Tombol full width di HP agar mudah ditekan */
-            width: 100% !important; 
-            padding: 10px 0 !important;
+            width: 100% !important;
+            font-size: 13px !important;
+            padding: 8px 0 !important;
+            white-space: nowrap !important;
         }
     }
     </style>
@@ -4133,6 +4130,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
