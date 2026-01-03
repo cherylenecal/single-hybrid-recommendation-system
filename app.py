@@ -973,6 +973,12 @@ def render_part_1():
         width: 100%; 
         transition: all 0.3s ease;
     }
+
+    /* PENTING: Paksa teks di dalam tombol agar warnanya mengikuti tombol (bukan ikut warna pertanyaan) */
+    div.stButton p {
+        color: inherit !important;
+    }
+    
     div.stButton > button[kind="secondary"] {
         background-color: #FFFFFF !important;
         color: #03043D !important;
@@ -4127,6 +4133,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
