@@ -934,7 +934,7 @@ KEYS_BIG5 = list(questions_B.keys())
 
 def render_part_1():
     # --- STYLE CSS UNTUK TAMPILAN COVER ---
-    st.markdown("""
+   st.markdown("""
     <style>
     /* 1. SETUP DASAR */
     .stApp {
@@ -963,7 +963,7 @@ def render_part_1():
         color: #2D4A44 !important;
     }
     
-    /* 5. TOMBOL UMUM (DESKTOP) */
+    /* 5. TOMBOL (STYLE UMUM) */
     div.stButton > button {
         border-radius: 8px !important;
         font-size: 16px !important;
@@ -973,7 +973,6 @@ def render_part_1():
         width: 100%; 
         transition: all 0.3s ease;
     }
-
     /* Warna Tombol */
     div.stButton > button[kind="secondary"] {
         background-color: #FFFFFF !important;
@@ -985,48 +984,47 @@ def render_part_1():
         color: #FFFFFF !important;
         border: none !important;
     }
-    
-    /* Hover Effects */
-    div.stButton > button:hover { transform: translateY(-2px); }
-    div.stButton > button[kind="primary"]:hover { background-color: #1A1A5E !important; }
-    div.stButton > button[kind="secondary"]:hover { background-color: #F0F2FF !important; }
 
-    /* ========================================================== */
-    /* 6. RESPONSIVE KHUSUS TOMBOL NAVIGASI (HANYA TOMBOL)      */
-    /* ========================================================== */
+    /* ============================================================ */
+    /* 6. RESPONSIVE KHUSUS NAVIGASI (SNIPER MODE 🎯)             */
+    /* ============================================================ */
     @media (max-width: 600px) {
         
-        /* A. Font Size Kecil di HP */
+        /* Kecilkan Font di HP */
         h2 { font-size: 20px !important; }
         div[data-testid="stMarkdownContainer"] p { font-size: 14px !important; }
 
-        /* B. LOGIKA KHUSUS TOMBOL KIRI-KANAN */
-        /* Hanya targetkan baris yang punya tombol Primary (Next) di dalamnya */
-        div[data-testid="stHorizontalBlock"]:has(button[kind="primary"]) {
+        /* --- LOGIKA BARU BERDASARKAN HTML ANDA --- */
+
+        /* 1. Cari Block Horizontal yang isinya ada tombol NEXT (Primary) */
+        div[data-testid="stHorizontalBlock"]:has(button[data-testid="stBaseButton-primary"]) {
             display: flex !important;
-            flex-direction: row !important;
+            flex-direction: row !important; /* Paksa Kiri-Kanan */
             align-items: center !important;
+            flex-wrap: nowrap !important;
             gap: 10px !important;
         }
 
-        /* Sembunyikan Spasi Tengah (Kolom ke-2) HANYA di baris tombol */
-        div[data-testid="stHorizontalBlock"]:has(button[kind="primary"]) [data-testid="column"]:nth-of-type(2) {
+        /* 2. Hancurkan Kolom Tengah (Spacer) di block tersebut */
+        /* Kita targetkan anak ke-2 (nth-child 2) */
+        div[data-testid="stHorizontalBlock"]:has(button[data-testid="stBaseButton-primary"]) > div[data-testid="stColumn"]:nth-child(2) {
             display: none !important;
+            width: 0 !important;
         }
 
-        /* Atur Lebar Tombol Back (Kolom 1) & Next (Kolom 3) */
-        div[data-testid="stHorizontalBlock"]:has(button[kind="primary"]) [data-testid="column"] {
+        /* 3. Atur Kolom Back (1) dan Next (3) agar berbagi ruang 50:50 */
+        div[data-testid="stHorizontalBlock"]:has(button[data-testid="stBaseButton-primary"]) > div[data-testid="stColumn"] {
             width: 50% !important;
             flex: 1 !important;
-            min-width: 0 !important;
+            min-width: 0 !important; /* Mencegah kolom jatuh ke bawah */
         }
 
-        /* Styling Tombolnya agar muat */
+        /* 4. Pastikan Tombol memenuhi kolomnya */
         div.stButton > button {
-            width: 100% !important; 
+            width: 100% !important;
             font-size: 13px !important;
             padding: 8px 0 !important;
-            white-space: nowrap !important; 
+            white-space: nowrap !important;
         }
     }
     </style>
@@ -4135,6 +4133,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
