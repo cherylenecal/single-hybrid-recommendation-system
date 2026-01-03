@@ -1262,11 +1262,12 @@ def render_part_2():
     
     # Ambil nilai dari temp_answers_2, default 3
     default_val = st.session_state['temp_answers_2'].get(current_key, 3)
-
+    
+    soal_html = f'<div class="custom-soal">{current_idx + 1}. {teks_soal}</div>'
     # --- C. TAMPILKAN ITEM KUESIONER (Panggil Fungsi Helper) ---
     # Menggunakan likert_item yang sama
     jawaban = likert_item(
-        question_text=f"{current_idx + 1}. {teks_soal}",
+        question_text=f"{soal_html}",
         key_name=f"radio_{current_key}", 
         default_value=default_val
     )
@@ -4136,6 +4137,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
