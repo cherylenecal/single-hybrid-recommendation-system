@@ -934,7 +934,7 @@ KEYS_BIG5 = list(questions_B.keys())
 
 def render_part_1():
     # --- STYLE CSS UNTUK TAMPILAN COVER ---
-   st.markdown("""
+    st.markdown("""
     <style>
     /* 1. SETUP DASAR */
     .stApp {
@@ -963,7 +963,7 @@ def render_part_1():
         color: #2D4A44 !important;
     }
     
-    /* 5. TOMBOL (STYLE UMUM) */
+    /* 5. TOMBOL UMUM */
     div.stButton > button {
         border-radius: 8px !important;
         font-size: 16px !important;
@@ -973,7 +973,6 @@ def render_part_1():
         width: 100%; 
         transition: all 0.3s ease;
     }
-    /* Warna Tombol */
     div.stButton > button[kind="secondary"] {
         background-color: #FFFFFF !important;
         color: #03043D !important;
@@ -985,41 +984,34 @@ def render_part_1():
         border: none !important;
     }
 
-    /* ============================================================ */
-    /* 6. RESPONSIVE KHUSUS NAVIGASI (SNIPER MODE 🎯)             */
-    /* ============================================================ */
+    /* 6. RESPONSIVE KHUSUS NAVIGASI (SNIPER MODE 🎯) */
     @media (max-width: 600px) {
-        
-        /* Kecilkan Font di HP */
         h2 { font-size: 20px !important; }
         div[data-testid="stMarkdownContainer"] p { font-size: 14px !important; }
 
-        /* --- LOGIKA BARU BERDASARKAN HTML ANDA --- */
-
-        /* 1. Cari Block Horizontal yang isinya ada tombol NEXT (Primary) */
+        /* Cari Block yang ada tombol NEXT */
         div[data-testid="stHorizontalBlock"]:has(button[data-testid="stBaseButton-primary"]) {
             display: flex !important;
-            flex-direction: row !important; /* Paksa Kiri-Kanan */
+            flex-direction: row !important;
             align-items: center !important;
             flex-wrap: nowrap !important;
             gap: 10px !important;
         }
 
-        /* 2. Hancurkan Kolom Tengah (Spacer) di block tersebut */
-        /* Kita targetkan anak ke-2 (nth-child 2) */
+        /* Hapus Kolom Tengah */
         div[data-testid="stHorizontalBlock"]:has(button[data-testid="stBaseButton-primary"]) > div[data-testid="stColumn"]:nth-child(2) {
             display: none !important;
             width: 0 !important;
         }
 
-        /* 3. Atur Kolom Back (1) dan Next (3) agar berbagi ruang 50:50 */
+        /* Bagi Rata Kiri Kanan */
         div[data-testid="stHorizontalBlock"]:has(button[data-testid="stBaseButton-primary"]) > div[data-testid="stColumn"] {
             width: 50% !important;
             flex: 1 !important;
-            min-width: 0 !important; /* Mencegah kolom jatuh ke bawah */
+            min-width: 0 !important;
         }
 
-        /* 4. Pastikan Tombol memenuhi kolomnya */
+        /* Styling Tombol HP */
         div.stButton > button {
             width: 100% !important;
             font-size: 13px !important;
@@ -1029,7 +1021,8 @@ def render_part_1():
     }
     </style>
     """, unsafe_allow_html=True)
-    
+
+    # --- MEMULAI KONTEN UTAMA ---
     st.header("📝 Bagian 1: Karakteristik Wirausaha (Self-Efficacy, Innovativeness, Locus of Control, dan Need for Achievement)")
     
     # --- A. SAFETY CHECK (Profil & Session) ---
@@ -4134,6 +4127,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
