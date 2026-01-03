@@ -574,13 +574,6 @@ def render_profile():
     
     # 1. KATEGORI (Dropdown)
     st.write("**Kategori**")
-    st.caption("Mohon pilih kategori yang paling menggambarkan peran Anda dalam aktivitas ekonomi atau profesional saat ini:")
-    
-    role = st.selectbox(
-        "Pilih Kategori", # Label tersembunyi/kecil karena sudah ada di write/caption
-        options=["Calon Wirausahawan", "Pelaku UMKM", "Pelajar/Mahasiswa", "Profesional"],
-        label_visibility="collapsed" # Menyembunyikan label default agar lebih rapi
-    )
 
     # --- FYI EXPANDER ---
     with st.expander("ℹ️ Klik di sini untuk penjelasan detail setiap kategori"):
@@ -591,6 +584,15 @@ def render_profile():
         * **Profesional**: Individu yang bekerja sebagai karyawan, pegawai, freelancer, atau tenaga ahli di suatu perusahaan/instansi.
         """)
     # --------------------------------
+    
+    st.caption("Mohon pilih kategori yang paling menggambarkan peran Anda dalam aktivitas ekonomi atau profesional saat ini:")
+    
+    role = st.selectbox(
+        "Pilih Kategori", # Label tersembunyi/kecil karena sudah ada di write/caption
+        options=["Calon Wirausahawan", "Pelaku UMKM", "Pelajar/Mahasiswa", "Profesional"],
+        label_visibility="collapsed" # Menyembunyikan label default agar lebih rapi
+    )
+
 
     if role == "Calon Wirausahawan":
         role_desc = st.text_input(
@@ -4145,6 +4147,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
