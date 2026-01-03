@@ -3515,15 +3515,15 @@ def render_hasil_hybrid():
     row_data['rekomendasi_sektor_qA_hybrid'] = rekomendasi_sektor_qA_hybrid
     row_data.update(engine.create_user_vector(row_data))
 
-    st.write("rekomendasi_sektor_qA_hybrid")
-    st.write(rekomendasi_sektor_qA_hybrid)
+    # st.write("rekomendasi_sektor_qA_hybrid")
+    # st.write(rekomendasi_sektor_qA_hybrid)
 
 
     # 3. Euclidean Distance (Dapatkan Top 5 Awal)
     jarak_sorted, top_picks = engine.final_sector(row_data, rekomendasi_sektor_qA_hybrid)
     
-    st.write("jarak sorted")
-    st.write(jarak_sorted)
+    # st.write("jarak sorted")
+    # st.write(jarak_sorted)
 
     # Simpan hasil Euclidean
     row_data['top3_euclid_qA_hybrid'] = list(jarak_sorted.keys())[:3]
@@ -3652,10 +3652,10 @@ def render_hasil_hybrid():
     # ============================================
     # [DEBUGGING AREA] LIHAT ISI ROW DATA
     # ============================================
-    st.info("Debugging Mode Active")
-    with st.expander("🔍 KLIK DISINI: Lihat Data Mentah (JSON Row Data)"):
-        st.write("Ini adalah data lengkap hasil perhitungan sebelum ditampilkan ke UI:")
-        st.json(row_data) # <--- INI AKAN MENAMPILKAN SEMUA ISI DICTIONARY
+    # st.info("Debugging Mode Active")
+    # with st.expander("🔍 KLIK DISINI: Lihat Data Mentah (JSON Row Data)"):
+    #     st.write("Ini adalah data lengkap hasil perhitungan sebelum ditampilkan ke UI:")
+    #     st.json(row_data) # <--- INI AKAN MENAMPILKAN SEMUA ISI DICTIONARY
     
     # ============================================
     # TAMPILAN UI
@@ -4105,6 +4105,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
