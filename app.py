@@ -37,6 +37,11 @@ class DatabaseManager:
 
         # 2. Buat Tabel Baru (Menggunakan single quote ''' agar aman)
         create_table_query = '''
+
+        -- 1. Pastikan Database-nya Ada dulu (Ganti 'test' sesuai nama di secrets.toml kamu)
+        CREATE DATABASE IF NOT EXISTS test;
+        USE test;
+        
         CREATE TABLE IF NOT EXISTS mst_tbl(
             user_id VARCHAR(50) PRIMARY KEY,
             created_at DATETIME,
@@ -4128,6 +4133,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
