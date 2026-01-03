@@ -775,7 +775,7 @@ def likert_item(question_text, key_name, default_value=3):
         background-color: transparent !important;
         border: none !important;
         padding: 0 !important;
-        width: 40px !important;
+        width: 80px !important;
         cursor: pointer !important;
         z-index: 2; /* Pastikan tombol di atas label jika overlap */
     }
@@ -813,7 +813,7 @@ def likert_item(question_text, key_name, default_value=3):
             position: absolute !important; /* Lepas dari aliran flex */
             top: 0 !important;
             left: 0 !important;
-            width: 50% !important; /* Setengah layar */
+            width: 80% !important; /* Setengah layar */
             text-align: left !important; /* Rata kiri */
             margin: 0 !important;
             font-size: 12px !important; /* Kecilkan sedikit font */
@@ -833,7 +833,7 @@ def likert_item(question_text, key_name, default_value=3):
         
         /* Perkecil sedikit area klik tombol agar muat 5 biji */
         div[role="radiogroup"] > label {
-            width: 30px !important; 
+            width: 50px !important; 
         }
     }
     </style>
@@ -4137,6 +4137,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
