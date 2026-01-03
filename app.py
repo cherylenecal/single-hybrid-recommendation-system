@@ -1001,11 +1001,45 @@ def render_part_1():
         background-color: #F0F2FF !important;
     }
 
-    /* RESPONSIVE (HP) */
+    /* 6. RESPONSIVE (HP - TAMPILAN KHUSUS) */
     @media (max-width: 600px) {
+        /* A. Font Size Dikecilkan */
         h2 { font-size: 22px !important; }
-        div[data-testid="stMarkdownContainer"] p { font-size: 16px !important; } /* Lebih kecil di HP */
-        div.stButton > button { width: 50% !important; margin-bottom: 10px; }
+        div[data-testid="stMarkdownContainer"] p { font-size: 14px !important; }
+        
+        /* B. TRIK SIDE-BY-SIDE (KIRI-KANAN) */
+        
+        /* 1. Paksa container kolom tetap sebaris (Row) */
+        div[data-testid="stHorizontalBlock"] {
+            display: flex !important;
+            flex-direction: row !important; /* Kunci agar tidak tumpuk ke bawah */
+            align-items: center !important;
+            gap: 10px !important; /* Jarak antar tombol */
+        }
+
+        /* 2. Sembunyikan Kolom Tengah (Spacer 10) di HP */
+        /* Kita targetkan anak ke-2 (kolom tengah) untuk hilang */
+        div[data-testid="column"]:nth-of-type(2) {
+            display: none !important;
+            width: 0 !important;
+        }
+
+        /* 3. Atur Kolom Kiri (Back) & Kanan (Next) */
+        div[data-testid="column"] {
+            flex: 1 !important; /* Membagi ruang sisa sama rata (50:50) */
+            width: auto !important;
+            min-width: 0 !important;
+        }
+
+        /* 4. Styling Tombol di HP */
+        div.stButton > button { 
+            width: 100% !important; /* Tombol memenuhi kolomnya */
+            font-size: 13px !important; /* Huruf agak kecil biar muat */
+            padding: 10px 0 !important; /* Padding atas bawah */
+            margin-bottom: 0 !important;
+            height: auto !important;
+            white-space: nowrap !important; /* Cegah teks turun baris */
+        }
     }
     </style>
     """, unsafe_allow_html=True)
@@ -4113,6 +4147,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
