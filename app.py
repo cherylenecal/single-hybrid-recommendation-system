@@ -1029,6 +1029,7 @@ def render_part_1():
     }
     </style>
     """, unsafe_allow_html=True)
+    
     st.header("📝 Bagian 1: Karakteristik Wirausaha (Self-Efficacy, Innovativeness, Locus of Control, dan Need for Achievement)")
     
     # --- A. SAFETY CHECK (Profil & Session) ---
@@ -4133,6 +4134,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
