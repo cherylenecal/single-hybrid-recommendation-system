@@ -936,13 +936,13 @@ def render_part_1():
     # --- STYLE CSS UNTUK TAMPILAN COVER ---
     st.markdown("""
     <style>
-    
+    /* 1. SETUP DASAR */
     .stApp {
         background-color: #F8F9F1;
         font-family: 'Inter', sans-serif;
     }
     
-    /* 2. HEADER STYLING (Menargetkan st.header) */
+    /* 2. HEADER */
     h2 {
         color: #0A0A44 !important;
         font-weight: 700 !important;
@@ -952,93 +952,92 @@ def render_part_1():
     }
 
     /* 3. PROGRESS BAR */
-    /* Mengubah warna batang progress bar menjadi Biru Dongker */
     .stProgress > div > div > div > div {
         background-color: #03043D;
     }
 
-    /* --- PENGATURAN TEKS PERTANYAAN --- */
-    /* Ini yang mengatur besar kecilnya tulisan soal */
+    /* 4. TEKS PERTANYAAN */
     div[data-testid="stMarkdownContainer"] p {
-        font-size: 20px !important; /* <--- UBAH ANGKA INI (Misal: 18px, 24px) */
+        font-size: 20px !important; 
         font-weight: 500 !important;
         color: #2D4A44 !important;
     }
     
-    /* 4. TOMBOL (BUTTONS) */
+    /* 5. TOMBOL UMUM (DESKTOP) */
     div.stButton > button {
         border-radius: 8px !important;
         font-size: 16px !important;
         font-weight: 600 !important;
         padding: 0.5rem 1rem !important;
-        transition: all 0.3s ease;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        width: 100%; 
+        transition: all 0.3s ease;
     }
 
-    /* Tombol Secondary (Back) -> Putih dengan Border Biru */
+    /* Warna Tombol */
     div.stButton > button[kind="secondary"] {
         background-color: #FFFFFF !important;
         color: #03043D !important;
         border: 2px solid #03043D !important;
     }
-
-    /* Tombol Primary (Next/Finish) -> Biru Solid */
     div.stButton > button[kind="primary"] {
         background-color: #03043D !important;
         color: #FFFFFF !important;
         border: none !important;
     }
 
-    /* Efek Hover untuk semua tombol */
-    div.stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    }
-    div.stButton > button[kind="primary"]:hover {
-        background-color: #1A1A5E !important;
-    }
-    div.stButton > button[kind="secondary"]:hover {
-        background-color: #F0F2FF !important;
-    }
+    /* Hover Effects */
+    div.stButton > button:hover { transform: translateY(-2px); }
+    div.stButton > button[kind="primary"]:hover { background-color: #1A1A5E !important; }
+    div.stButton > button[kind="secondary"]:hover { background-color: #F0F2FF !important; }
 
-    /* 6. RESPONSIVE (HP - TAMPILAN KHUSUS) */
+    /* ========================================================== */
+    /* 6. RESPONSIVE (HP) - MODE PAKSA (NUCLEAR OPTION) ☢️      */
+    /* ========================================================== */
     @media (max-width: 600px) {
-        /* A. Font Size Dikecilkan */
-        h2 { font-size: 22px !important; }
+        
+        /* Kecilkan font */
+        h2 { font-size: 20px !important; }
         div[data-testid="stMarkdownContainer"] p { font-size: 14px !important; }
-        
-        /* B. TRIK SIDE-BY-SIDE (KIRI-KANAN) */
-        
-        /* 1. Paksa container kolom tetap sebaris (Row) */
-        div[data-testid="stHorizontalBlock"] {
+
+        /* --- TRIK SIDE-BY-SIDE --- */
+
+        /* 1. FORCE CONTAINER JADI BARIS (ROW) */
+        [data-testid="stHorizontalBlock"] {
             display: flex !important;
-            flex-direction: row !important; /* Kunci agar tidak tumpuk ke bawah */
+            flex-direction: row !important;
+            flex-wrap: nowrap !important; /* DILARANG TURUN KE BAWAH */
             align-items: center !important;
-            gap: 10px !important; /* Jarak antar tombol */
+            gap: 8px !important; /* Jarak antar tombol dikurangi */
         }
 
-        /* 2. Sembunyikan Kolom Tengah (Spacer 10) di HP */
-        /* Kita targetkan anak ke-2 (kolom tengah) untuk hilang */
-        div[data-testid="column"]:nth-of-type(2) {
+        /* 2. MATIKAN KOLOM TENGAH (SPACER) */
+        [data-testid="column"]:nth-of-type(2) {
             display: none !important;
-            width: 0 !important;
+            width: 0px !important;
+            flex: 0 !important;
+            min-width: 0px !important; /* Ini yg sering bikin error */
         }
 
-        /* 3. Atur Kolom Kiri (Back) & Kanan (Next) */
-        div[data-testid="column"] {
-            flex: 1 !important; /* Membagi ruang sisa sama rata (50:50) */
-            width: auto !important;
-            min-width: 0 !important;
+        /* 3. ATUR KOLOM KIRI & KANAN */
+        [data-testid="column"]:nth-of-type(1), 
+        [data-testid="column"]:nth-of-type(3) {
+            width: 50% !important;
+            flex: 1 1 0px !important; /* Flex grow 1, shrink 1, basis 0 (PENTING) */
+            min-width: 0px !important; /* PENTING: Biarkan dia mengecil di bawah batas default */
+            max-width: 50% !important;
         }
 
-        /* 4. Styling Tombol di HP */
-        div.stButton > button { 
-            width: 100% !important; /* Tombol memenuhi kolomnya */
-            font-size: 13px !important; /* Huruf agak kecil biar muat */
-            padding: 10px 0 !important; /* Padding atas bawah */
-            margin-bottom: 0 !important;
-            height: auto !important;
-            white-space: nowrap !important; /* Cegah teks turun baris */
+        /* 4. STYLING TOMBOL DI HP */
+        div.stButton > button {
+            width: 100% !important; 
+            font-size: 12px !important; /* Font lebih kecil biar muat */
+            padding: 8px 0 !important;
+            margin: 0 !important;
+            height: 40px !important; /* Fix tinggi biar rapi */
+            white-space: nowrap !important; /* Teks dilarang turun baris */
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
         }
     }
     </style>
@@ -4147,6 +4146,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
