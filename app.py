@@ -957,10 +957,11 @@ def render_part_1():
     }
 
     /* 4. TEKS PERTANYAAN */
-    div[data-testid="stMarkdownContainer"] p {
-        font-size: 20px !important; 
+    .custom-soal {
+        font-size: 20px !important; /* Atur besar huruf di sini */
         font-weight: 500 !important;
         color: #2D4A44 !important;
+        line-height: 1.5;
     }
     
     /* 5. TOMBOL UMUM */
@@ -993,7 +994,9 @@ def render_part_1():
     /* 6. RESPONSIVE KHUSUS NAVIGASI (SNIPER MODE 🎯) */
     @media (max-width: 600px) {
         h2 { font-size: 20px !important; }
-        div[data-testid="stMarkdownContainer"] p { font-size: 8px !important; }
+        .custom-soal {
+            font-size: 16px !important; /* Lebih kecil di HP */
+        }
 
         /* Cari Block yang ada tombol NEXT */
         div[data-testid="stHorizontalBlock"]:has(button[data-testid="stBaseButton-primary"]) {
@@ -1056,11 +1059,11 @@ def render_part_1():
     # Ambil Teks & Nilai Default
     teks_soal = questions_A.get(current_key, f"Pertanyaan {current_key} belum diset.")
     default_val = st.session_state['temp_answers_1'].get(current_key, 3)
-
+    soal_html = f'<div class="custom-soal">{current_idx + 1}. {teks_soal}</div>'
     # --- C. TAMPILKAN ITEM KUESIONER (Panggil Fungsi Helper) ---
     # Di sini CSS dan UI dirender otomatis
     jawaban = likert_item(
-        question_text=f"{current_idx + 1}. {teks_soal}",
+        question_text=f"{current_idx + 1}. {soal_html}",
         key_name=f"radio_{current_key}",
         default_value=default_val
     )
@@ -4130,6 +4133,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
