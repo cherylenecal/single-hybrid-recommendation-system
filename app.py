@@ -1005,7 +1005,7 @@ def render_part_1():
     @media (max-width: 600px) {
         h2 { font-size: 22px !important; }
         div[data-testid="stMarkdownContainer"] p { font-size: 16px !important; } /* Lebih kecil di HP */
-        div.stButton > button { width: 100% !important; margin-bottom: 10px; }
+        div.stButton > button { margin-bottom: 10px; }
     }
     </style>
     """, unsafe_allow_html=True)
@@ -4113,6 +4113,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
