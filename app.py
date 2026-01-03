@@ -772,7 +772,7 @@ def likert_item(question_text, key_name, default_value=3):
         background-color: transparent !important;
         border: none !important;
         padding: 0 !important;
-        width: 120px !important;
+        width: 130px !important;
         cursor: pointer !important;
         z-index: 2; /* Pastikan tombol di atas label jika overlap */
     }
@@ -4134,6 +4134,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
