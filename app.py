@@ -995,7 +995,7 @@ def render_part_1():
     @media (max-width: 600px) {
         h2 { font-size: 20px !important; }
         .custom-soal {
-            font-size: 16px !important; /* Lebih kecil di HP */
+            font-size: 10px !important; /* Lebih kecil di HP */
         }
 
         /* Cari Block yang ada tombol NEXT */
@@ -4133,6 +4133,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
