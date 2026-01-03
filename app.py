@@ -167,7 +167,7 @@ class DatabaseManager:
     # 4. FUNGSI LIHAT DATA (Untuk Admin/Kamu ngecek)
     def view_all_users(self):
         conn = self.get_connection()
-        df = pd.read_sql_query("SELECT * FROM users ORDER BY id DESC", conn)
+        df = pd.read_sql_query("SELECT * FROM mst_tbl ORDER BY id DESC", conn)
         conn.close()
         return df
     
@@ -4128,6 +4128,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
