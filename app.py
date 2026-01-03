@@ -1070,8 +1070,6 @@ def render_part_1():
     with col_prev:
         if current_idx > 0:
             if st.button("⬅️ Back", use_container_width=True):
-                with st.spinner('Loading..'):
-                    time.sleep(2)
                 st.session_state['q_index'] -= 1
                 st.rerun()
 
@@ -1080,8 +1078,6 @@ def render_part_1():
         # Jika BELUM soal terakhir
         if current_idx < total_soal - 1:
             if st.button("Next ➡️", type="primary", use_container_width=True):
-                with st.spinner('Loading...'):
-                    time.sleep(2)
                 # Simpan jawaban sementara ke Session State
                 st.session_state['temp_answers_1'][current_key] = jawaban
                 st.session_state['q_index'] += 1
@@ -1276,8 +1272,6 @@ def render_part_2():
     with col_prev:
         if current_idx > 0:
             if st.button("⬅️ Back", use_container_width=True):
-                with st.spinner('Loading...'):
-                    time.sleep(2)
                 st.session_state['q_index'] -= 1
                 st.rerun()
 
@@ -1286,8 +1280,6 @@ def render_part_2():
         # Jika BELUM soal terakhir
         if current_idx < total_soal - 1:
             if st.button("Next ➡️", type="primary", use_container_width=True):
-                with st.spinner('Loading...'):
-                    time.sleep(2)
                 # Simpan jawaban sementara ke temp_answers_2
                 st.session_state['temp_answers_2'][current_key] = jawaban
                 st.session_state['q_index'] += 1
@@ -4136,6 +4128,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
