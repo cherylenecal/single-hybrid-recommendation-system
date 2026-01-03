@@ -958,7 +958,7 @@ def render_part_1():
 
     /* 4. TEKS PERTANYAAN */
     .custom-soal {
-        font-size: 20px !important; /* Atur besar huruf di sini */
+        font-size: 25px !important; /* Atur besar huruf di sini */
         font-weight: 500 !important;
         color: #2D4A44 !important;
         line-height: 1.5;
@@ -4133,6 +4133,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
