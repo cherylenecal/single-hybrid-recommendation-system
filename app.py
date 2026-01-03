@@ -503,6 +503,8 @@ def render_cover_page():
 
     # TOMBOL START
     if st.button("Start"):
+        with st.spinner('Loading...'):
+                    time.sleep(2)
         st.session_state['halaman_sekarang'] = "profil"
         st.rerun()
     
@@ -645,7 +647,9 @@ def render_profile():
     # --- BAGIAN TOMBOL NEXT ---
     # Menggunakan st.button biasa (bukan form_submit karena ini bukan di dalam st.form)
     if st.button("Lanjut ke Kuesioner ➡️", type="primary"):
-        
+        with st.spinner('Loading..'):
+        # Pura-pura proses berat (hapus baris ini nanti)
+            time.sleep(2)
         # 1. Validasi Input (Cek apakah domisili kosong?)
         
         if not name:
@@ -1025,6 +1029,8 @@ def render_part_1():
     if 'temp_profile' not in st.session_state:
         st.warning("Silakan isi profil terlebih dahulu.")
         if st.button("Kembali ke Profil"):
+            with st.spinner('Loading..'):
+                time.sleep(2)
             st.session_state['halaman_sekarang'] = "profil"
             st.rerun()
         return
@@ -1063,6 +1069,8 @@ def render_part_1():
     with col_prev:
         if current_idx > 0:
             if st.button("⬅️ Back", use_container_width=True):
+                with st.spinner('Loading..'):
+                    time.sleep(2)
                 st.session_state['q_index'] -= 1
                 st.rerun()
 
@@ -1071,6 +1079,8 @@ def render_part_1():
         # Jika BELUM soal terakhir
         if current_idx < total_soal - 1:
             if st.button("Next ➡️", type="primary", use_container_width=True):
+                with st.spinner('Loading...'):
+                    time.sleep(2)
                 # Simpan jawaban sementara ke Session State
                 st.session_state['temp_answers_1'][current_key] = jawaban
                 st.session_state['q_index'] += 1
@@ -1080,6 +1090,8 @@ def render_part_1():
         else:
             if st.button("Next to second questionnaire 🚀", type="primary", use_container_width=True):
                 # 1. Simpan jawaban soal terakhir ini
+                with st.spinner('Loading...'):
+                    time.sleep(2)
                 st.session_state['temp_answers_1'][current_key] = jawaban
                 
                 # 2. Ambil ID User dari Session State
@@ -1213,6 +1225,8 @@ def render_part_2():
     if 'temp_profile' not in st.session_state:
         st.warning("Silakan isi profil terlebih dahulu.")
         if st.button("Kembali ke Profil"):
+            with st.spinner('Loading...'):
+                    time.sleep(2)
             st.session_state['halaman_sekarang'] = "profil"
             st.rerun()
         return
@@ -1261,6 +1275,8 @@ def render_part_2():
     with col_prev:
         if current_idx > 0:
             if st.button("⬅️ Back", use_container_width=True):
+                with st.spinner('Loading...'):
+                    time.sleep(2)
                 st.session_state['q_index'] -= 1
                 st.rerun()
 
@@ -1269,6 +1285,8 @@ def render_part_2():
         # Jika BELUM soal terakhir
         if current_idx < total_soal - 1:
             if st.button("Next ➡️", type="primary", use_container_width=True):
+                with st.spinner('Loading...'):
+                    time.sleep(2)
                 # Simpan jawaban sementara ke temp_answers_2
                 st.session_state['temp_answers_2'][current_key] = jawaban
                 st.session_state['q_index'] += 1
@@ -1278,6 +1296,8 @@ def render_part_2():
         else:
             # Tombol Finalisasi
             if st.button("Lihat Hasil 🏁", type="primary", use_container_width=True):
+                with st.spinner('Loading...'):
+                    time.sleep(2)
                 # 1. Simpan jawaban soal terakhir ini
                 st.session_state['temp_answers_2'][current_key] = jawaban
                 
@@ -3398,6 +3418,8 @@ def render_hasil_single():
 
     
     if st.button("🚀 Lanjut ke Analisis Hybrid", type="primary", use_container_width=True):
+        with st.spinner('Loading...'):
+                    time.sleep(2)
         st.session_state['halaman_sekarang'] = "hasil_hybrid"
         st.rerun()
 
@@ -3894,10 +3916,14 @@ def render_hasil_hybrid():
     col_btn1, col_btn2 = st.columns([1, 1])
     with col_btn1:
         if st.button("🚀 Lanjut ke Summary", type="primary", use_container_width=True):
+            with st.spinner('Loading...'):
+                    time.sleep(2)
             st.session_state['halaman_sekarang'] = "hasil_summary"
             st.rerun()
     with col_btn2:
         if st.button("⏮️ Back to Single", use_container_width=True):
+            with st.spinner('Loading...'):
+                    time.sleep(2)
             st.session_state['halaman_sekarang'] = "hasil_single"
             st.rerun()
 
@@ -4051,12 +4077,16 @@ def render_comparison_dashboard():
     with col_btn1:
         # TOMBOL PINDAH KE HYBRID
         if st.button("⏮️ Back to Single", type="primary", use_container_width=True):
+            with st.spinner('Loading...'):
+                    time.sleep(2)
             st.session_state['halaman_sekarang'] = "hasil_single"
             st.rerun()
 
     with col_btn2:
         # TOMBOL RESET
         if st.button("⏮️ Back to Hybrid", type="primary", use_container_width=True):
+            with st.spinner('Loading...'):
+                    time.sleep(2)
             st.session_state['halaman_sekarang'] = "hasil_hybrid"
             st.rerun()
 
@@ -4105,6 +4135,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
