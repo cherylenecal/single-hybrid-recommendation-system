@@ -2860,7 +2860,7 @@ class RecommenderEngine:
 
         # Jika ada yang kurang, cari 1 cluster lagi untuk menambal kekurangan itu
         if sektor_kurang:
-            st.info(f"🔄 Masih ada sektor user yang belum tercover: {sektor_kurang}")
+            # st.info(f"🔄 Masih ada sektor user yang belum tercover: {sektor_kurang}")
             # Logic coverage... (sama seperti sebelumnya)
             best_choice = None
             best_gain = -1
@@ -4108,4 +4108,5 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
