@@ -2457,7 +2457,7 @@ class RecommenderEngine:
             qB = [x.strip() for x in qB.split(",")] if qB.strip() else []
 
         # [TRACKING]
-        st.write(f"2. Normalized Input: qA={qA}, qB={qB}")
+        # st.write(f"2. Normalized Input: qA={qA}, qB={qB}")
 
         # Jika salah satu kosong -> Gagal
         if not qA or not qB:
@@ -2471,7 +2471,7 @@ class RecommenderEngine:
         intersection = [c for c in qA if c in qB]
         
         # [TRACKING]
-        st.write(f"3. Intersection found: {intersection}")
+        # st.write(f"3. Intersection found: {intersection}")
         
         if intersection:
             initial = intersection[:]
@@ -2560,9 +2560,9 @@ class RecommenderEngine:
 
         sektor_kurang = sektor_user - sektor_terwakili
 
-        # [TRACKING]
-        st.write(f"7. Coverage Check. User Sectors: {sektor_user}")
-        st.write(f"   -> Missing Coverage: {sektor_kurang}")
+        # # [TRACKING]
+        # st.write(f"7. Coverage Check. User Sectors: {sektor_user}")
+        # st.write(f"   -> Missing Coverage: {sektor_kurang}")
 
         # Jika masih ada sektor user yang belum masuk rekomendasi
         if sektor_kurang:
@@ -2585,7 +2585,7 @@ class RecommenderEngine:
 
             if best_choice:
                 final_candidates.append(best_choice)
-                st.write(f"   -> Added for coverage: {best_choice} (Covered: {gain})")
+                # st.write(f"   -> Added for coverage: {best_choice} (Covered: {gain})")
 
         # [TRACKING END]
         result = final_candidates[:2]
@@ -4108,3 +4108,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+
