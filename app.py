@@ -993,7 +993,7 @@ def render_part_1():
     /* 6. RESPONSIVE KHUSUS NAVIGASI (SNIPER MODE 🎯) */
     @media (max-width: 600px) {
         h2 { font-size: 20px !important; }
-        div[data-testid="stMarkdownContainer"] p { font-size: 10px !important; }
+        div[data-testid="stMarkdownContainer"] p { font-size: 8px !important; }
 
         /* Cari Block yang ada tombol NEXT */
         div[data-testid="stHorizontalBlock"]:has(button[data-testid="stBaseButton-primary"]) {
@@ -1184,7 +1184,7 @@ def render_part_2():
     /* 6. RESPONSIVE KHUSUS NAVIGASI (SNIPER MODE 🎯) */
     @media (max-width: 600px) {
         h2 { font-size: 20px !important; }
-        div[data-testid="stMarkdownContainer"] p { font-size: 10px !important; }
+        div[data-testid="stMarkdownContainer"] p { font-size: 8px !important; }
 
         /* Cari Block yang ada tombol NEXT */
         div[data-testid="stHorizontalBlock"]:has(button[data-testid="stBaseButton-primary"]) {
@@ -4130,6 +4130,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
