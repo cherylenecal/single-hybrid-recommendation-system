@@ -566,10 +566,10 @@ def render_profile():
     """, unsafe_allow_html=True)
     st.header("👤 Profil Pengguna")
 
-    st.write("**Nama**")
+    st.write("**Inisial / Nama**")
     name = st.text_input(
-        "Masukkan Nama Anda",
-        help="Ketik nama Anda di sini."
+        "Ketik nama atau inisial Anda di sini...",
+        help="Ketik nama/inisial Anda di sini."
     )
 
     st.divider()
@@ -936,97 +936,74 @@ def render_part_1():
     # --- STYLE CSS UNTUK TAMPILAN COVER ---
     st.markdown("""
     <style>
-    /* 1. SETUP DASAR */
+    /* 1. SETUP DASAR & FONT */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    
     .stApp {
         background-color: #F8F9F1;
-    }
-    
-    /* 2. CONTAINER COVER */
-    .cover-container {
-        text-align: left;
-        /* Desktop: Padding besar agar lega */
-        padding: 100px 10% 20px 10%; 
-    }
-    
-    /* 3. TYPOGRAPHY (DESKTOP) */
-    .main-title {
-        color: #0A0A44;
-        font-size: 36px; /* Besar di Desktop */
-        font-weight: 800;
-        margin-bottom: 20px;
-        font-family: 'Inter', sans-serif;
-        line-height: 1.2;
-    }
-    
-    .description {
-        color: #2D4A44;
-        font-size: 24px; /* Besar di Desktop */
-        line-height: 1.5;
-        margin-bottom: 30px;
         font-family: 'Inter', sans-serif;
     }
     
-    .hint-text {
-        color: #4A4A4A;
-        font-size: 14px;
-        margin-bottom: 5px;
-    }
-    
-    .cta-text {
-        color: #4A4A4A;
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 30px;
+    /* 2. HEADER STYLING (Menargetkan st.header) */
+    h2 {
+        color: #0A0A44 !important;
+        font-weight: 700 !important;
+        font-size: 28px !important;
+        margin-bottom: 1rem !important;
+        padding-top: 1rem;
     }
 
-    /* 4. STYLING TOMBOL */
+    /* 3. PROGRESS BAR */
+    /* Mengubah warna batang progress bar menjadi Biru Dongker */
+    .stProgress > div > div > div > div {
+        background-color: #03043D;
+    }
+    
+    /* 4. TOMBOL (BUTTONS) */
     div.stButton > button {
-        background-color: #03043D !important;
-        color: white !important;
         border-radius: 8px !important;
-        padding: 10px 40px !important;
-        font-size: 18px !important;
+        font-size: 16px !important;
         font-weight: 600 !important;
+        padding: 0.5rem 1rem !important;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* Tombol Secondary (Back) -> Putih dengan Border Biru */
+    div.stButton > button[kind="secondary"] {
+        background-color: #FFFFFF !important;
+        color: #03043D !important;
+        border: 2px solid #03043D !important;
+    }
+
+    /* Tombol Primary (Next/Finish) -> Biru Solid */
+    div.stButton > button[kind="primary"] {
+        background-color: #03043D !important;
+        color: #FFFFFF !important;
         border: none !important;
-        transition: 0.3s;
-        box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
     }
-    
+
+    /* Efek Hover untuk semua tombol */
     div.stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    div.stButton > button[kind="primary"]:hover {
         background-color: #1A1A5E !important;
-        transform: scale(1.05);
+    }
+    div.stButton > button[kind="secondary"]:hover {
+        background-color: #F0F2FF !important;
     }
 
-    .footer-link {
-        color: #0A0A44;
-        font-size: 13px;
-        text-decoration: underline;
-        cursor: pointer;
-    }
-
-    /* ============================================= */
-    /* 5. MEDIA QUERY UNTUK HP (Layar < 600px)       */
-    /* ============================================= */
+    /* 5. RESPONSIVE (HP) */
     @media (max-width: 600px) {
-        .cover-container {
-            /* Kurangi padding atas agar tidak terlalu turun */
-            padding: 40px 5% 20px 5% !important; 
+        h2 {
+            font-size: 22px !important;
         }
-
-        .main-title {
-            /* Kecilkan font judul agar muat */
-            font-size: 24px !important; 
-        }
-
-        .description {
-            /* Kecilkan font deskripsi agar enak dibaca */
-            font-size: 16px !important; 
-        }
-
+        /* Tombol full width di HP */
         div.stButton > button {
-            /* Tombol full width di HP agar mudah ditekan */
-            width: 100% !important; 
-            padding: 10px 0 !important;
+            width: 100% !important;
+            margin-bottom: 10px;
         }
     }
     </style>
@@ -4135,6 +4112,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
