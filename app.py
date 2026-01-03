@@ -958,7 +958,7 @@ def render_part_1():
 
     /* 4. TEKS PERTANYAAN */
     div[data-testid="stMarkdownContainer"] p {
-        font-size: 20px !important; 
+        font-size: 15px !important; 
         font-weight: 500 !important;
         color: #2D4A44 !important;
     }
@@ -1149,7 +1149,7 @@ def render_part_2():
 
     /* 4. TEKS PERTANYAAN */
     div[data-testid="stMarkdownContainer"] p {
-        font-size: 20px !important; 
+        font-size: 15px !important; 
         font-weight: 500 !important;
         color: #2D4A44 !important;
     }
@@ -4130,6 +4130,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
