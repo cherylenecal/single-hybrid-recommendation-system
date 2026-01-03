@@ -33,15 +33,17 @@ class DatabaseManager:
     def init_db(self):
         conn = self.get_connection()
         cursor = conn.cursor()
+        db_name = self.db_config["database"] # Ambil nama DB dari secrets
+
+        # 1. Bikin Database dulu kalau belum ada
+        cursor.execute(f"CREATE DATABASE IF NOT EXISTS {db_name}")
+        
+        # 2. Pilih Database-nya
+        cursor.execute(f"USE {db_name}")
         
 
         # 2. Buat Tabel Baru (Menggunakan single quote ''' agar aman)
         create_table_query = '''
-
-        -- 1. Pastikan Database-nya Ada dulu (Ganti 'test' sesuai nama di secrets.toml kamu)
-        CREATE DATABASE IF NOT EXISTS test;
-        USE test;
-        
         CREATE TABLE IF NOT EXISTS mst_tbl(
             user_id VARCHAR(50) PRIMARY KEY,
             created_at DATETIME,
@@ -4133,6 +4135,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
