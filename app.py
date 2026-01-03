@@ -94,7 +94,7 @@ class DatabaseManager:
     # 3. FUNGSI SIMPAN DATA USER
     def save_user_profile(self, profile_dict):
         print("--- [DEBUG] 1. Membuka Koneksi... ---")
-        conn = self.get_connection()
+        conn = self.get_connection()s
         print("--- [DEBUG] Connected ---")
         cursor = conn.cursor()
 
@@ -575,6 +575,16 @@ def render_profile():
     # 1. KATEGORI (Dropdown)
     st.write("**Kategori**")
     st.caption("Mohon pilih kategori yang paling menggambarkan peran Anda dalam aktivitas ekonomi atau profesional saat ini:")
+    # --- FYI EXPANDER ---
+    with st.expander("ℹ️ Klik di sini untuk penjelasan detail setiap kategori"):
+        st.markdown("""
+        * **Calon Wirausahawan**: Individu yang sedang merencanakan atau dalam tahap persiapan untuk memulai bisnis, namun belum beroperasi secara penuh.
+        * **Pelaku UMKM**: Individu yang saat ini sudah memiliki dan menjalankan usaha (Usaha Mikro, Kecil, atau Menengah).
+        * **Pelajar/Mahasiswa**: Individu yang status utamanya sedang menempuh pendidikan formal (sekolah atau kuliah).
+        * **Profesional**: Individu yang bekerja sebagai karyawan, pegawai, freelancer, atau tenaga ahli di suatu perusahaan/instansi.
+        """)
+    # --------------------------------
+    
     role = st.selectbox(
         "Pilih Kategori", # Label tersembunyi/kecil karena sudah ada di write/caption
         options=["Calon Wirausahawan", "Pelaku UMKM", "Pelajar/Mahasiswa", "Profesional"],
@@ -4134,6 +4144,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
