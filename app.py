@@ -936,8 +936,6 @@ def render_part_1():
     # --- STYLE CSS UNTUK TAMPILAN COVER ---
     st.markdown("""
     <style>
-    /* 1. SETUP DASAR & FONT */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
     
     .stApp {
         background-color: #F8F9F1;
@@ -957,6 +955,14 @@ def render_part_1():
     /* Mengubah warna batang progress bar menjadi Biru Dongker */
     .stProgress > div > div > div > div {
         background-color: #03043D;
+    }
+
+    /* --- PENGATURAN TEKS PERTANYAAN --- */
+    /* Ini yang mengatur besar kecilnya tulisan soal */
+    div[data-testid="stMarkdownContainer"] p {
+        font-size: 20px !important; /* <--- UBAH ANGKA INI (Misal: 18px, 24px) */
+        font-weight: 500 !important;
+        color: #2D4A44 !important;
     }
     
     /* 4. TOMBOL (BUTTONS) */
@@ -995,16 +1001,11 @@ def render_part_1():
         background-color: #F0F2FF !important;
     }
 
-    /* 5. RESPONSIVE (HP) */
+    /* RESPONSIVE (HP) */
     @media (max-width: 600px) {
-        h2 {
-            font-size: 22px !important;
-        }
-        /* Tombol full width di HP */
-        div.stButton > button {
-            width: 100% !important;
-            margin-bottom: 10px;
-        }
+        h2 { font-size: 22px !important; }
+        div[data-testid="stMarkdownContainer"] p { font-size: 16px !important; } /* Lebih kecil di HP */
+        div.stButton > button { width: 100% !important; margin-bottom: 10px; }
     }
     </style>
     """, unsafe_allow_html=True)
@@ -4112,6 +4113,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
