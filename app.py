@@ -3104,6 +3104,7 @@ def render_hasil_single():
     scroll_to_here(0, key='scroll_hasil_single')
     st.success("Analisis Selesai! Berikut adalah hasil rekomendasi berdasarkan profil Anda.")
     st.header("🎯 Hasil Rekomendasi (Single Method)")
+    st.write("⚠️PENTING: Setelah membaca penjelasan halaman ini, mohon dilanjutkan ke halaman selanjutnya untuk penjelasan metode Hybrid dan dilanjutkan ke feedback/tanggapan di akhir. Feedback/tanggapan Anda sangat diperlukan dalam menentukan hasil penelitian kami, terkait performa kedua sistem rekomendasi")
     # --- PANDUAN TERPADU ---
     with st.expander("📖 Panduan Cara Membaca Hasil Analisis", expanded=False):
         st.markdown("### Skor & Notasi")
@@ -3698,6 +3699,7 @@ def render_hasil_hybrid():
     scroll_to_here(0, key='scroll_hasil_hybrid')
     # 2. Panggil fungsi untuk loncat ke jangkar tersebut
     st.header("🎯 Hasil Rekomendasi (Hybrid Method)")
+    st.write("⚠️PENTING: Setelah membaca penjelasan halaman ini, mohon dilanjutkan ke halaman selanjutnya untuk ringkasan dan mengisi feedback/tanggapan di akhir. Feedback/tanggapan Anda sangat diperlukan dalam menentukan hasil penelitian kami, terkait performa kedua sistem rekomendasi")
 
     # --- PANDUAN TERPADU ---
     with st.expander("📖 Panduan Cara Membaca Hasil Analisis", expanded=False):
@@ -4148,6 +4150,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
