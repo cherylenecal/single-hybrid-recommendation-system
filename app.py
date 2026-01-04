@@ -578,10 +578,10 @@ def render_profile():
     # --- FYI EXPANDER ---
     with st.expander("ℹ️ Klik di sini untuk penjelasan detail setiap kategori"):
         st.markdown("""
-        * **Calon Wirausahawan**: Individu yang sedang merencanakan atau dalam tahap persiapan untuk memulai bisnis, namun belum beroperasi secara penuh.
-        * **Pelaku UMKM**: Individu yang saat ini sudah memiliki dan menjalankan usaha (Usaha Mikro, Kecil, atau Menengah).
-        * **Pelajar/Mahasiswa**: Individu yang status utamanya sedang menempuh pendidikan formal (sekolah atau kuliah).
-        * **Profesional**: Individu yang bekerja sebagai karyawan, pegawai, freelancer, atau tenaga ahli di suatu perusahaan/instansi.
+        * **Calon Wirausahawan**: Individu yang sedang merencanakan atau dalam mempersiapkan untuk memulai bisnis, namun belum menjalankannya secara penuh.
+        * **Pelaku UMKM**: Individu yang sudah memiliki dan menjalankan usaha (Usaha Mikro, Kecil, atau Menengah).
+        * **Pelajar/Mahasiswa**: Individu yang sedang menempuh pendidikan (sekolah atau kuliah).
+        * **Profesional**: Individu yang sudah bekerja, seperti karyawan, pegawai, freelancer, atau tenaga ahli.
         """)
     # --------------------------------
     
@@ -4147,6 +4147,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
