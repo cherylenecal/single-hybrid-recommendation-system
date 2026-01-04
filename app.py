@@ -3929,7 +3929,7 @@ def render_hasil_hybrid():
     # NAVIGASI
     col_btn1, col_btn2 = st.columns([1, 1])
     with col_btn1:
-        if st.button("🚀 Lanjut ke Summary", type="primary", use_container_width=True):
+        if st.button("🚀 Lanjut ke Summary/Ringkasan & Feedback", type="primary", use_container_width=True):
             with st.spinner('Loading...'):
                     time.sleep(2)
             st.session_state['halaman_sekarang'] = "hasil_summary"
@@ -4150,6 +4150,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
