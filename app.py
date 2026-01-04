@@ -3997,6 +3997,7 @@ def render_comparison_dashboard():
     scroll_to_here(0, key='summary')
 
     st.title("⚖️ Perbandingan Hasil Rekomendasi")
+    st.write("⚠️PENTING: Mohon untuk mengisi feedback di akhir halaman ini. Feedback/tanggapan Anda sangat diperlukan dalam menentukan hasil penelitian kami, terkait performa kedua sistem rekomendasi")
 
     user_id = st.session_state.get('current_user_id')
     if not user_id:
@@ -4147,6 +4148,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
