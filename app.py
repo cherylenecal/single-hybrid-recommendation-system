@@ -1410,7 +1410,7 @@ def render_feedback_section(user_id, db, sectors_single, sectors_hybrid):
                 st.caption("ℹ️ **1**: Kurang Akurat — **5**: Sangat Akurat")
 
                 # 2. PILIH SEKTOR (MULTISELECT) - BARU
-                st.write("2. 2. Setelah membaca hasil rekomendasi beserta deskripsinya, sektor mana yang paling cocok dengan preferensi Anda? (Bisa memilih lebih dari 1)")
+                st.write("2. Setelah membaca hasil rekomendasi beserta deskripsinya, sektor mana yang paling cocok dengan preferensi Anda? (Bisa memilih lebih dari 1)")
                 if sectors_hybrid:
                     chosen_h_list = st.multiselect(
                         "Pilih Sektor Hybrid",
@@ -4150,6 +4150,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
