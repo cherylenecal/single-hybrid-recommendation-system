@@ -2145,8 +2145,6 @@ class RecommenderEngine:
         for cluster, sectors in cluster_mapping.items():
             for s in sectors:
                 sector_to_cluster.setdefault(s, []).append(cluster)
-
-        # --- MULAI KODE ASLI ANDA ---
         
         # jika datanya tidak valid -> kembalikan dict kosong
         if not isinstance(top5_list, list) or len(top5_list) == 0:
@@ -3002,20 +3000,25 @@ def render_hasil_single():
         }
     </style>
     """, unsafe_allow_html=True)
+    
     # --- 1. AMBIL DATA DARI SESSION STATE ---
-    # Gabungkan jawaban Part 1 dan Part 2
+    # Gabungkan jawaban kuesioner bagian 1 (karakter kewirausahaan)
     answers_1 = st.session_state.get('temp_answers_1', {})
+    # Gabungkan jawaban kuesioner bagian 2 (big five personality)
     answers_2 = st.session_state.get('temp_answers_2', {})
 
+    # menggabungkan kedua kamus (dictionary) jawaban menjadi satu variabel user_input
     user_input = {**answers_1, **answers_2}
+    # memanggil class recommenderengine yang berisi logika perhitungan sistem rekomendasi
     engine = RecommenderEngine()
+    # menyalin data input ke row_data untuk diproses lebih lanjut tanpa merusak data asli
     row_data = user_input.copy()
 
     # ============================================
     # STEP A: PROSES 4 DOMAIN KEWIRAUSAHAAN
     # ============================================
     
-    # 1. Hitung Score & Kategori
+    # 1. Hitung Score & Kategori (rata-rata skor per dimensi (se, inn, nach, loc)
     scores_A = engine.domain_cols_score(user_input)
 
     # Masukkan skor angka ke row_data (untuk keperluan vektor nanti)
@@ -3023,27 +3026,39 @@ def render_hasil_single():
     row_data['score_INN'] = scores_A['innovativeness']
     row_data['score_NACH'] = scores_A['need_achievement']
 
-    # Konversi Angka -> Kategori (String)
+    # Konversi Angka -> Kategori (low, mid, high)
     row_data['cat_self_efficacy'] = engine.kategori_score(scores_A['self_efficacy'])
     row_data['cat_innovativeness'] = engine.kategori_score(scores_A['innovativeness'])
     row_data['cat_need_achievement'] = engine.kategori_score(scores_A['need_achievement'])
     
    # LOC Logic
+    # mengambil nilai mentah untuk dimensi locus of control internal & external
     loc_i_raw = [user_input.get(k,3) for k in engine.domain_cols['loc_internal']]
     loc_e_raw = [user_input.get(k,3) for k in engine.domain_cols['loc_external']]
+
+    # membandingkan rata-rata internal vs eksternal untuk menentukan dominasi locus of control user
     row_data['cat_loc'] = engine.kategori_loc(sum(loc_i_raw)/len(loc_i_raw), sum(loc_e_raw)/len(loc_e_raw))
     
-    # 2. Fuzzy Match (Broad Recommendation)
+    # 2. Broad matching
+    # mencocokkan kategori user dengan sektor yang sesuai berdasarkan aturan
     rekomendasi_sektor_qA = engine.rekomendasi_per_domain(row_data)
+
+    # menyimpan daftar sektor kandidat (masih dalam cakupan luas)
     row_data['rekomendasi_sektor_qA'] = rekomendasi_sektor_qA
+    
     # 3. Create User Vector (untuk Euclidean)
+    # mengubah label kategori (high/low) menjadi angka bobot (0-3) untuk perhitungan jarak
     vector_vals = engine.create_user_vector(row_data)
-    row_data.update(vector_vals) # Masukkan score_SE, score_INN, dll ke row_data
+
+    # memperbarui row_data dengan nilai vektor numerik tersebut
+    row_data.update(vector_vals)
 
     # 4. Euclidean Distance (Final Sector Ranking)
+    # menghitung jarak terdekat antara profil user dengan profil ideal setiap sektor (yang sudah dalam bentuk vektor numerik)
     jarak_sorted, top_picks = engine.final_sector(row_data, rekomendasi_sektor_qA) #jarak_s
     row_data["final_sector_qA"] = top_picks # List sektor terurut dari jarak terdekat
     sector_names_list = list(jarak_sorted.keys())
+
     
     # Simpan Top 3 & top 5 untuk Logic Refinement nanti
     row_data['top3_euclid_qA'] = sector_names_list[:3]
@@ -3051,6 +3066,7 @@ def render_hasil_single():
 
     # 5. Mapping Sektor -> Cluster A
     row_data['cluster_weights_top5_qA'] = engine.cluster_weights_from_top5_qA(row_data['top3_euclid_qA'])
+    # mengambil top 1
     row_data['cluster_top5_best_qA'], row_data['cluster_top5_ranking_qA'] = engine.best_list_cluster_from_weights_qA(row_data['cluster_weights_top5_qA'])
 
     # Simpan mapping sektor mana saja yang masuk ke cluster terpilih
@@ -3545,7 +3561,7 @@ def render_hasil_hybrid():
     val_e = sum(loc_e_raw)/len(loc_e_raw) if loc_e_raw else 0
     row_data['cat_loc'] = engine.kategori_loc(val_i, val_e)
 
-    # 2. Fuzzy Match & Vector
+    # 2.Broad Matching
     rekomendasi_sektor_qA_hybrid = engine.rekomendasi_per_domain(row_data)
     row_data['rekomendasi_sektor_qA_hybrid'] = rekomendasi_sektor_qA_hybrid
     row_data.update(engine.create_user_vector(row_data))
@@ -3572,10 +3588,15 @@ def render_hasil_hybrid():
     # 5. Hitung TF-IDF Similarity (Cell 39)
     # Menggunakan Top 5 Euclidean sebagai kandidat
     sector_docs = engine.get_sector_descriptions()
-
+    
+    # menampung deskripsi kandidat sektor yang akan diproses tf-idf
     candidates_A = {
+        # mengambil nama sektor sebagai kunci (key) dan deskripsinya sebagai nilai (value) dari data referensi
+        # jika deskripsi tidak ditemukan di dokumen, maka akan dikosongkan agar program tidak error
         s: sector_docs.get(s, "")
+        # melakukan perulangan hanya pada 5 sektor terbaik yang sebelumnya terpilih melalui metode jarak euclidean
         for s in row_data['top5_euclid_qA_hybrid'] 
+        # memberikan filter keamanan untuk memastikan nama sektor tersebut memang terdaftar di dalam dokumen deskripsi
         if s in sector_docs
     }
 
@@ -3589,7 +3610,7 @@ def render_hasil_hybrid():
     )
 
     
-    # 2. PROSES HASIL (PENTING: Ambil Namanya Saja)
+    # 2. PROSES HASIL (Ambil Namanya Saja)
     if top3_tfidf_A:
         # Extract nama sektor dari tuple (item[0])
         # Contoh: [('Software', 0.9), ('Construction', 0.8)] -> ['Software', 'Construction']
@@ -3602,9 +3623,9 @@ def render_hasil_hybrid():
     row_data['top3_tfidf_sector_hybrid'] = top3_tfidf_A_names
 
     # 7. Cluster Weights dari Top 3 TF-IDF (Cell 52)
-    # Perhatikan: Inputnya sekarang 'top3_tfidf_sector' sesuai notebook
     weights_A = engine.cluster_weights_from_top5_qA(row_data['top3_tfidf_sector_hybrid'])
-    
+
+    # mengambil top 1
     juara_A_list, ranking_A_list = engine.best_list_cluster_from_weights_qA(weights_A)
     
     row_data['cluster_top5_best_qA_hybrid'] = juara_A_list
@@ -4150,6 +4171,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
