@@ -1116,7 +1116,9 @@ def render_part_1():
         else:
             if st.button("Next to second questionnaire 🚀", type="primary", use_container_width=True):
                 # 1. Simpan jawaban soal terakhir ini
+                # interface loading muter
                 with st.spinner('Loading...'):
+                    # memberi waktu untuk tahapan selanjutnya
                     time.sleep(2)
                 st.session_state['temp_answers_1'][current_key] = jawaban
                 
@@ -1360,6 +1362,7 @@ def render_feedback_section(user_id, db, sectors_single, sectors_hybrid):
     Function khusus untuk menangani tampilan dan logika Feedback.
     Dipanggil di dalam dashboard perbandingan.
     """
+    # menulis normal text
     st.write("---")
     st.header("📝 Feedback Pengguna")
     st.info("Mohon bantu kami menilai metode mana yang memberikan rekomendasi paling akurat untuk Anda.")
@@ -4185,6 +4188,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
