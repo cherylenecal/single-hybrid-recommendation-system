@@ -15,7 +15,11 @@ import time
 
 
 class DatabaseManager:
+    # self = object DatabaseManager itu sendiri
+    # Dipakai supaya data (db_config) bisa dipakai di semua function dalam class ini
+    # __init__ akan otomatis dipanggil saat DatabaseManager() dibuat
     def __init__(self):
+        # akses ke secrets (host, username, password, milik db)
         self.db_config = st.secrets["mysql"]
         self.init_db()
 
@@ -32,6 +36,7 @@ class DatabaseManager:
     # 2. BIKIN TABEL (Jalan otomatis saat pertama kali)
     def init_db(self):
         conn = self.get_connection()
+        # perantara python ke sql
         cursor = conn.cursor()
         db_name = self.db_config["database"] # Ambil nama DB dari secrets
 
@@ -81,6 +86,7 @@ class DatabaseManager:
         
         try:
             cursor.execute(create_table_query)
+            # save hasil eksekusi query ke database
             conn.commit()
         except mysql.connector.Error as e:
             # INI AKAN MUNCUL DI LAYAR JIKA ERROR
@@ -89,6 +95,7 @@ class DatabaseManager:
             st.code(create_table_query, language="sql") # Tampilkan query biar kelihatan salahnya
             st.stop() # Hentikan program agar tidak crash lebih parah
         finally:
+            # menutup koneksi ke database
             conn.close()
 
     # 3. FUNGSI SIMPAN DATA USER
@@ -96,6 +103,7 @@ class DatabaseManager:
         print("--- [DEBUG] 1. Membuka Koneksi... ---")
         conn = self.get_connection()
         print("--- [DEBUG] Connected ---")
+        # perantara python ke sql
         cursor = conn.cursor()
 
         new_id = str(uuid.uuid4())[:8]
@@ -130,12 +138,14 @@ class DatabaseManager:
             raise e
         finally:
             print("--- [DEBUG] 5. Menutup Koneksi (Closing)... ---")
+            # menutup koneksi ke database
             conn.close()
     
     # B. FUNGSI UPDATE JAWABAN (DINAMIS)
     # Dipanggil di akhir Part 1 DAN di akhir Part 2
     def update_user_answers(self, user_id, answers_dict):
         conn = self.get_connection()
+        # perantara python ke sql
         cursor = conn.cursor()
         
         # Jika tidak ada jawaban (kosong), skip saja
@@ -147,7 +157,8 @@ class DatabaseManager:
         
         set_clauses = []
         values = []
-        
+
+        # ambil jawaban user dari answers_dict
         for key, val in answers_dict.items():
             set_clauses.append(f'`{key}` = %s') # Pakai tanda kutip dua untuk nama kolom
             values.append(val)
@@ -423,12 +434,12 @@ def render_cover_page():
     .stApp {
         background-color: #F8F9F1;
     }
-    
+     /* Container utama halaman cover (atur posisi & padding konten) */
     .cover-container {
-        text-align: left;
-        padding: 100px 10% 20px 10%;
+        text-align: left; # posisi teks rata kiri
+        padding: 100px 10% 20px 10%; # jarak dari atas, kanan, bawah, kiri
     }
-    
+    /* Styling judul utama */
     .main-title {
         color: #0A0A44;
         font-size: 36px;
@@ -1170,6 +1181,7 @@ def render_part_2():
     
     /* 5. TOMBOL UMUM */
     div.stButton > button {
+        # !important -> untuk override / ngedit CSS bawaan Streamlit
         border-radius: 8px !important;
         font-size: 16px !important;
         font-weight: 600 !important;
@@ -1309,6 +1321,7 @@ def render_part_2():
             # Tombol Finalisasi
             if st.button("Lihat Hasil 🏁", type="primary", use_container_width=True):
                 with st.spinner('Loading...'):
+                    # untuk loading terlebih dahulu selama 2 detik, agar memberi waktu tahap selanjutnya untuk load
                     time.sleep(2)
                 # 1. Simpan jawaban soal terakhir ini
                 st.session_state['temp_answers_2'][current_key] = jawaban
@@ -1321,6 +1334,7 @@ def render_part_2():
                     st.error("⚠️ Sesi habis. Silakan isi profil ulang.")
                     if st.button("Ke Profil"):
                         st.session_state['halaman_sekarang'] = 'profil'
+                        # memaksa Streamlit menjalankan ulang script
                         st.rerun()
                     return
 
@@ -4135,7 +4149,7 @@ def main():
 
     st.set_page_config(page_title="Form Profil", layout="wide")
     # --- [FIX] INISIALISASI DATABASE DISINI ---
-    # Cek dulu: Apakah 'db' sudah ada di tas? Kalau belum, masukkan sekarang.
+    # Cek dulu: Apakah 'db' sudah ada di memory streamlit
     if 'db' not in st.session_state:
         st.session_state['db'] = DatabaseManager()
         
@@ -4171,6 +4185,7 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
 
