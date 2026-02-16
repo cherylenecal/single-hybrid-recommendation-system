@@ -1,4 +1,4 @@
-📌 Research Overview
+## 📌 Research Overview
 This project is a research-based implementation designed to assist aspiring entrepreneurs in identifying suitable business sectors based on their psychological profiles. By addressing the information overload and cold-start problem, this system provides personalized recommendations using a combination of psychological constructs and advanced filtering techniques.
 
 🧠 Methodology
